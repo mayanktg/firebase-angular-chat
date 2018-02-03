@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 main, #messages-card {
-  height: 100%;
+  height: calc(100% - 40px);
   padding-bottom: 0;
 }
 #messages-card-container {
-  height: calc(100% - 150px);
+  height: calc(100vh - 120px);
   padding-bottom: 0;
 }
 #messages-card {
@@ -48,9 +48,8 @@ main, #messages-card {
   padding-bottom: 0;
 }
 #messages {
-  overflow-y: auto;
-  margin-bottom: 10px;
-  height: calc(100% - 80px);
+  overflow-y: scroll;
+  height: 100%;
 }
 #message-filler {
   flex-grow: 1;
@@ -98,8 +97,9 @@ main, #messages-card {
 #message-form {
   display: flex;
   flex-direction: row;
-  width: calc(100% - 48px);
   float: left;
+  bottom: 0;
+  position: fixed;
 }
 #image-form {
   display: flex;
@@ -166,8 +166,8 @@ main, #messages-card {
 }
 @media screen and (max-width: 610px) {
   header {
-    height: 113px;
-    padding-bottom: 80px !important;
+    height: 20px;
+    padding: 12px !important;
   }
   #user-container {
     top: 72px;
