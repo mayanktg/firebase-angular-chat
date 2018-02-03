@@ -19,11 +19,11 @@ export const environment = {
     // ***********************************************************************************************************************
     // * TODO(DEVELOPER): Update values according to: Firebase Console > Overview > Add Firebase to your web app. *
     // ***********************************************************************************************************************
-    apiKey: '',
-    authDomain: '',
-    databaseURL: '',
-    projectId: '',
-    storageBucket: '',
-    messagingSenderId: ''
+    apiKey: "AIzaSyDTqqiDjJ3hJjQ-VR0QnjnDY5-vPgYGWsk",
+    authDomain: "fir-angular-chat-ef181.firebaseapp.com",
+    databaseURL: "https://fir-angular-chat-ef181.firebaseio.com",
+    projectId: "fir-angular-chat-ef181",
+    storageBucket: "fir-angular-chat-ef181.appspot.com",
+    messagingSenderId: "11543204387"
   }
 };

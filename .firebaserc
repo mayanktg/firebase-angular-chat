@@ -1,1 +1,6 @@
-{}
+{
+  "projects": {
+    "production": "fir-demo-project",
+    "chat": "fir-angular-chat-ef181"
+  }
+}
