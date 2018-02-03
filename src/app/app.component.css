@@ -45,7 +45,7 @@ main, #messages-card {
   width: auto;
   height: 100%;
   padding-top: 0;
-  padding-bottom: 0;
+  padding-bottom: 20px;
 }
 #messages {
   overflow-y: scroll;
@@ -64,7 +64,12 @@ main, #messages-card {
   padding-top: 10px;
   /*opacity: 0;*/
   transition: opacity 1s ease-in-out;
+  width: 100%;
 }
+.message-block {
+
+}
+
 .message-container.visible {
   opacity: 1;
 }
@@ -192,4 +197,10 @@ main, #messages-card {
 .mdl-button .material-icons {
   top: -1px;
   margin-right: 5px;
+}
+
+#clear-btn {
+  float: right;
+  color: white;
+  font-weight: 700;
 }
