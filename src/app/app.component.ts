@@ -24,6 +24,7 @@ const LOADING_IMAGE_URL = 'https://www.google.com/images/spin-32.gif';
 const PROFILE_PLACEHOLDER_IMAGE_URL = '/assets/images/profile_placeholder.png';
 const NO_RECOMMENDATION_TEXT = 'Sorry, no recommendations found';
 const MOVIE_API_URL = 'https://jsonmock.hackerrank.com/api/movies/search/?Title=';
+const DEVICE_ID = Math.floor((1 + Math.random()) * 0x10000).toString(16);
 
 @Component({
   selector: 'app-root',
@@ -45,23 +46,25 @@ export class AppComponent {
 
   constructor(public db: AngularFireDatabase, public http: Http) {
     this.messages = this.db.list('/messages');
-
+    this.scrollToTop();
     this.http = http;
-
     const messagesRef = firebase.database().ref().child("messages");
     const startKey = messagesRef.push().key;
     messagesRef.orderByKey().startAt(startKey)
     .on('child_added', (snapshot) => {
       const data = snapshot.val();
-      setTimeout(() => {
-        const objDiv = document.getElementById('messages');
-        objDiv.scrollTop = objDiv.scrollHeight + 2000;
-      }, 300)
-      
-      if (data.type === 'client') {
+      this.scrollToTop();
+      if (data.type === 'client' && DEVICE_ID === data.deviceId) {
         this.sendServerChatMessage(data.text);
       }
     });
+  }
+
+  scrollToTop =() => {
+    setTimeout(() => {
+      const objDiv = document.getElementById('messages');
+      objDiv.scrollTop = objDiv.scrollHeight + 2000;
+    }, 300);
   }
 
   sendServerChatMessage = (clientText) => {
@@ -75,6 +78,7 @@ export class AppComponent {
         return firebase.database().ref('messages').push({
           name: 'Server',
           type: 'server',
+          deviceId: DEVICE_ID,
           photoUrl: 'http://www.newdesignfile.com/postpic/2012/11/minecraft-factions-server-icons_177429.png',
           text: text
         });
@@ -250,6 +254,7 @@ export class AppComponent {
         name: 'user',
         type: 'client',
         text: this.value,
+        deviceId: DEVICE_ID,
         photoUrl: PROFILE_PLACEHOLDER_IMAGE_URL
       }).then(() => {
         // Clear message text field and SEND button state.
