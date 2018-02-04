@@ -38,10 +38,10 @@ export class AppComponent {
   topics = '';
   value = '';
   stackObj = {
-    inputCount: 0,
-    operationsCount: 0,
-    stack: [],
-    topStackElems: []
+    inputCount: 0, // Total number of stack operations 
+    operationsCount: 0, // Number of perations performed 
+    stack: [], // Current stack
+    topStackElems: [] // Element at top of stack after each operation.
   };
 
   constructor(public db: AngularFireDatabase, public http: Http) {
@@ -67,6 +67,7 @@ export class AppComponent {
     }, 300);
   }
 
+  // Main functions which handles server chat response.
   sendServerChatMessage = (clientText) => {
     console.log(clientText);
     return this.getTextMessage(clientText)
@@ -89,6 +90,7 @@ export class AppComponent {
       });
   }
 
+  // Function that parses clientText and sends server text accordingly.
   getTextMessage = (clientText) => {
     let serverText = `Hello! I'm your server speaking, I know nothing!`;
     console.log('getTextMessage', clientText);
@@ -124,6 +126,7 @@ export class AppComponent {
     });
   };
 
+  // Common function to call a Get API.
   fetchData = (url) => {
     return new Promise((resolve, reject) => {
       this.http.get(url)
@@ -140,6 +143,7 @@ export class AppComponent {
     });
   }
 
+  // Movie recommendation based on the client search text.
   getMoviesRecommendation = (text) => {
     console.log('getMoviesRecommendation', text);
     return new Promise((resolve, reject) => { 
@@ -195,6 +199,7 @@ export class AppComponent {
     });
   };
 
+  // Stack operations (PUSH POP INC) Handler. 
   handleStackOperations = (clientText) => {
     return new Promise((resolve, reject) => {
       if (!isNaN(parseInt(clientText, 10))) {
@@ -238,12 +243,10 @@ export class AppComponent {
     });
   }
 
-  // TODO: Refactor into text message form component
   update(value: string) {
     this.value = value;
   }
 
-  // TODO: Refactor into text message form component
   saveMessage(event: any, el: HTMLInputElement) {
     event.preventDefault();
 
@@ -264,6 +267,8 @@ export class AppComponent {
       });
     }
   }
+
+  // Claer chat collection 'messages'.
   clearChat = () => {
     console.log('clearing chat');
     this.db.list('/messages').remove();
